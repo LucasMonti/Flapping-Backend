@@ -1,1 +1,1 @@
-export class Config {}
+export class Configuracion {}
