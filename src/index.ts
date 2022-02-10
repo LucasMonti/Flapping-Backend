@@ -1,4 +1,9 @@
-import app from './app';
+import {App} from "./app";
 
-app.listen(3002);
-console.log('Server on port 3002')
+async function main() {
+    const app = new App(3002);
+    await app.dbConnection();
+    await app.listen();
+}
+
+main();
