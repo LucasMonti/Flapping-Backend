@@ -8,13 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = require("./app");
+const config_1 = __importDefault(require("./config/config"));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const app = new app_1.App(3002);
+        const app = new app_1.App(config_1.default.PORT);
         yield app.dbConnection();
-        yield app.listen();
+        app.listen();
     });
 }
 main();

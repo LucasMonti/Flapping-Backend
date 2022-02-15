@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Configuracion = void 0;
-class Configuracion {
-}
-exports.Configuracion = Configuracion;
+const dotenv_1 = require("dotenv");
+(0, dotenv_1.config)();
+exports.default = {
+    PORT: process.env.PORT || "3002",
+};
 //# sourceMappingURL=config.js.map
