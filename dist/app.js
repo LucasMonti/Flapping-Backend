@@ -40,7 +40,7 @@ class App {
         console.log();
         this.app.listen(this.app.get("port"), () => {
             try {
-                console.log("Server on port " + this.app.get("port"));
+                console.log("Server on port: ", this.app.get("port"));
             }
             catch (error) {
                 throw new Error(error);
