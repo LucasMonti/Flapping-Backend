@@ -5,6 +5,7 @@ export class App {
   private app: Application;
 
   constructor(private port: number | string) {
+    console.log(this.port)
     this.app = express();
     this.settings();
   }

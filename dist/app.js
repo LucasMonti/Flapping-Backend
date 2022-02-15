@@ -14,9 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
+const connection_1 = __importDefault(require("./db/connection"));
 class App {
     constructor(port) {
         this.port = port;
+        console.log(this.port);
         this.app = (0, express_1.default)();
         this.settings();
     }
@@ -25,12 +27,13 @@ class App {
     }
     dbConnection() {
         return __awaiter(this, void 0, void 0, function* () {
-            // try {
-            //   await db.authenticate();
-            //   console.log("Database ON");
-            // } catch (error: any) {
-            //   throw new Error(error);
-            // }
+            try {
+                yield connection_1.default.authenticate();
+                console.log("Database ON");
+            }
+            catch (error) {
+                throw new Error(error);
+            }
         });
     }
     listen() {
