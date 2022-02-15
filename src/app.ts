@@ -26,7 +26,7 @@ export class App {
   listen() {
     this.app.listen(this.app.get("port"), () => {
       try {
-        console.log("Server on port ", this.app.get("port"));
+        console.log("Server on port: ", this.app.get("port"));
       } catch (error: any) {
         throw new Error(error);
       }
