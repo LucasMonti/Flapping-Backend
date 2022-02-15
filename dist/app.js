@@ -18,17 +18,18 @@ const connection_1 = __importDefault(require("./db/connection"));
 class App {
     constructor(port) {
         this.port = port;
+        console.log(this.port);
         this.app = (0, express_1.default)();
         this.settings();
     }
     settings() {
-        this.app.set('port', this.port || process.env.PORT || 3002);
+        this.app.set("port", this.port);
     }
     dbConnection() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield connection_1.default.authenticate();
-                console.log('Database ON');
+                console.log("Database ON");
             }
             catch (error) {
                 throw new Error(error);
@@ -36,9 +37,13 @@ class App {
         });
     }
     listen() {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.app.listen(this.app.get('port'));
-            console.log('Server on port', this.app.get('port'));
+        this.app.listen(this.app.get("port"), () => {
+            try {
+                console.log("Server on port " + this.app.get("port"));
+            }
+            catch (error) {
+                throw new Error(error);
+            }
         });
     }
 }

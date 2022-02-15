@@ -1,9 +1,11 @@
-import {App} from "./app";
+import { App } from "./app";
+
+import config from "./config/config";
 
 async function main() {
-    const app = new App(3002);
-    await app.dbConnection();
-    await app.listen();
+  const app = new App(config.PORT);
+  await app.dbConnection();
+  app.listen();
 }
 
 main();
