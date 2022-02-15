@@ -14,15 +14,17 @@ export class App {
   }
 
   async dbConnection() {
-    try {
-      await db.authenticate();
-      console.log("Database ON");
-    } catch (error: any) {
-      throw new Error(error);
-    }
+    // try {
+    //   await db.authenticate();
+    //   console.log("Database ON");
+    // } catch (error: any) {
+    //   throw new Error(error);
+    // }
   }
 
   listen() {
+    console.log();
+
     this.app.listen(this.app.get("port"), () => {
       try {
         console.log("Server on port " + this.app.get("port"));
