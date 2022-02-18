@@ -15,15 +15,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
 const connection_1 = __importDefault(require("./db/connection"));
+const cors_1 = __importDefault(require("cors"));
+const users_1 = __importDefault(require("./routes/users"));
 class App {
     constructor(port) {
         this.port = port;
+        this.apiPaths = {
+            users: '/api/users'
+        };
         console.log(this.port);
         this.app = (0, express_1.default)();
         this.settings();
+        this.middlewares();
+        this.routes();
     }
     settings() {
         this.app.set("port", this.port);
+    }
+    middlewares() {
+        this.app.use((0, cors_1.default)());
+        this.app.use(express_1.default.json());
+    }
+    routes() {
+        this.app.use(this.apiPaths.users, users_1.default);
     }
     dbConnection() {
         return __awaiter(this, void 0, void 0, function* () {
