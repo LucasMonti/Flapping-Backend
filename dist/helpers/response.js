@@ -1,12 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Error = exports.Success = void 0;
-class Success {
-    constructor(req, res, message, status, data) { }
+class TypeResponse {
+    success(res, message, statusCode, data) {
+        res.status(statusCode).json({
+            code: "OK",
+            message,
+            success: true,
+            data,
+        });
+    }
+    error(res, message, statusCode) {
+        res.status(statusCode).json({
+            code: "ERROR",
+            message,
+            success: false,
+            data: null,
+        });
+    }
 }
-exports.Success = Success;
-class Error {
-    constructor(req, res, message, status, data) { }
-}
-exports.Error = Error;
+exports.default = new TypeResponse();
 //# sourceMappingURL=response.js.map

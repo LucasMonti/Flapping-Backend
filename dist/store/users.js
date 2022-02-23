@@ -8,42 +8,39 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const response_1 = __importDefault(require("../helpers/response"));
-class UserController {
-    oneUser(req, res) {
+class UserStore {
+    findOneUser(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //Método para encontrar un usuario
+                //Busca con sequelize todos los usuarios
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                //Atrapa el error
             }
         });
     }
-    updateUser(req, res) {
+    updateOneUser(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //Método para actualizar un usuario
+                //Busca con sequelize todos los usuarios
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                //Atrapa el error
             }
         });
     }
-    removeUser(req, res) {
+    //ver los parametros que se les pasan
+    removeOneUser(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //Método para eliminar un usuario
+                //Busca en otro archivo el metodo para buscar los usuarios
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                //Atrapa el error
             }
         });
     }
 }
-exports.default = new UserController();
+exports.default = new UserStore();
 //# sourceMappingURL=users.js.map

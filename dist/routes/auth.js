@@ -4,17 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const users_1 = __importDefault(require("../controllers/users"));
-class UserRoutes {
+const auth_1 = __importDefault(require("../controllers/auth"));
+class AuthRoutes {
     constructor() {
         this.router = (0, express_1.Router)();
         this.config();
     }
     config() {
-        this.router.get("/id", users_1.default.oneUser);
-        this.router.put("/id", users_1.default.updateUser);
-        this.router.delete("/id", users_1.default.removeUser);
+        this.router.post("/login", auth_1.default.login);
+        this.router.post("/register", auth_1.default.register);
     }
 }
-exports.default = new UserRoutes().router;
-//# sourceMappingURL=users.js.map
+exports.default = new AuthRoutes().router;
+//# sourceMappingURL=auth.js.map

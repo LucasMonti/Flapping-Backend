@@ -1,17 +1,19 @@
 import express, { Application } from "express";
-import db from "./db/connection";
-import cors from 'cors'
-import users from './routes/users'
+import cors from "cors";
 
+import db from "./db/connection";
+
+import auth from "./routes/auth";
+import users from "./routes/users";
 
 export class App {
   private app: Application;
   private apiPaths = {
-        users : '/api/users'
-  }
+    auth: "/api",
+    users: "/api/users",
+  };
 
   constructor(private port: number | string) {
-    console.log(this.port)
     this.app = express();
     this.settings();
     this.middlewares();
@@ -23,12 +25,13 @@ export class App {
   }
 
   middlewares() {
-    this.app.use(cors())
-    this.app.use(express.json())
+    this.app.use(cors());
+    this.app.use(express.json());
   }
 
   routes() {
-    this.app.use(this.apiPaths.users, users)
+    this.app.use(this.apiPaths.auth, auth);
+    this.app.use(this.apiPaths.users, users);
   }
 
   async dbConnection() {
@@ -41,6 +44,8 @@ export class App {
   }
 
   listen() {
+    console.log();
+
     this.app.listen(this.app.get("port"), () => {
       try {
         console.log("Server on port: ", this.app.get("port"));

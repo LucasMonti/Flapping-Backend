@@ -6,30 +6,36 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../db/connection"));
 const User = connection_1.default.define("User", {
-    id: {
+    user_id: {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
     },
-    nombre: {
-        type: sequelize_1.DataTypes.STRING
-    },
+    // name_user: {
+    //   type: DataTypes.STRING,
+    // },
+    // lastname_user: {
+    //   type: DataTypes.STRING,
+    // },
     email: {
-        type: sequelize_1.DataTypes.STRING
+        type: sequelize_1.DataTypes.STRING,
     },
-    estado: {
-        type: sequelize_1.DataTypes.BOOLEAN
+    password: {
+        type: sequelize_1.DataTypes.STRING,
     },
-    createdAt: {
-        type: sequelize_1.DataTypes.DATE,
-    },
-    updatedAt: {
-        type: sequelize_1.DataTypes.DATE,
-    },
+    // wallet_address: {
+    //   type: DataTypes.STRING,
+    // },
+    // createdAt: {
+    //   type: DataTypes.DATE,
+    // },
+    // updatedAt: {
+    //   type: DataTypes.DATE,
+    // },
 }, {
-    modelName: 'user',
+    modelName: "user",
     underscored: true,
-    tableName: 'users',
+    tableName: "users",
     paranoid: true,
 });
 exports.default = User;
