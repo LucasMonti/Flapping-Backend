@@ -1,17 +1,13 @@
 import { Model, DataTypes } from "sequelize";
 import db from "../db/connection";
 
-//Ver si se puede integrar con la interface general de usuario
-interface UserInstance extends Model {
-  user_id: string;
-  // name_user: string;
-  // lastname_user: string;
+interface IUser extends Model {
+  user_id: number;
   email: string;
   password: string;
-  // wallet_address: string;
 }
 
-const User = db.define<UserInstance>(
+const User = db.define<IUser>(
   "User",
   {
     user_id: {
@@ -19,27 +15,12 @@ const User = db.define<UserInstance>(
       autoIncrement: true,
       primaryKey: true,
     },
-    // name_user: {
-    //   type: DataTypes.STRING,
-    // },
-    // lastname_user: {
-    //   type: DataTypes.STRING,
-    // },
     email: {
       type: DataTypes.STRING,
     },
     password: {
       type: DataTypes.STRING,
     },
-    // wallet_address: {
-    //   type: DataTypes.STRING,
-    // },
-    // createdAt: {
-    //   type: DataTypes.DATE,
-    // },
-    // updatedAt: {
-    //   type: DataTypes.DATE,
-    // },
   },
   {
     modelName: "user",

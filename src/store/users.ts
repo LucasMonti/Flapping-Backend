@@ -1,4 +1,4 @@
-import User from "../models/User";
+import User from "../models/user";
 
 //Ver el tipado de las promesas de acuerdo a lo que devulevan
 
