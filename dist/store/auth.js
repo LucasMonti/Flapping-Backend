@@ -12,38 +12,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const response_1 = __importDefault(require("../helpers/response"));
-class UserController {
-    oneUser(req, res) {
+const User_1 = __importDefault(require("../models/User"));
+class AuthStore {
+    signin(email) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //Método para encontrar un usuario
+                const user = yield User_1.default.findOne({ where: { email } });
+                if (user) {
+                    return user;
+                }
+                return;
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                console.log(error);
+                throw new Error("Error al buscar un usuario");
             }
         });
     }
-    updateUser(req, res) {
+    signup(user) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //Método para actualizar un usuario
+                const newUser = yield User_1.default.create(user);
+                return newUser;
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
-            }
-        });
-    }
-    removeUser(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                //Método para eliminar un usuario
-            }
-            catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                throw new Error("Error al guardar un usuario");
             }
         });
     }
 }
-exports.default = new UserController();
-//# sourceMappingURL=users.js.map
+exports.default = new AuthStore();
+//# sourceMappingURL=auth.js.map

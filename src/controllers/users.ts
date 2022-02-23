@@ -1,24 +1,32 @@
-import {Request, Response} from "express";
-import User from "../models/User";
+import { Request, Response } from "express";
 
-export const getUsuarios = (req: Request, res: Response) => {
-    console.log('soy el controlador')
-    res.json({
-        msg: 'getUsers'
-    })
-}
+import userStore from "../store/users";
+import response from "../helpers/response";
 
-export const postUsuario = async (req: Request, res: Response) => {
-    const {nombre, email, estado} = req.body;
+class UserController {
+  public async oneUser(req: Request, res: Response): Promise<void> {
     try {
-     const user = await User.create({nombre, email, estado})
-
-     res.json(user)
+      //Método para encontrar un usuario
     } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            msg: 'Error en la petición'
-        })
+      return response.error(res, "Internal server error", 500);
     }
+  }
 
+  public async updateUser(req: Request, res: Response): Promise<void> {
+    try {
+      //Método para actualizar un usuario
+    } catch (error) {
+      return response.error(res, "Internal server error", 500);
+    }
+  }
+
+  public async removeUser(req: Request, res: Response): Promise<void> {
+    try {
+      //Método para eliminar un usuario
+    } catch (error) {
+      return response.error(res, "Internal server error", 500);
+    }
+  }
 }
+
+export default new UserController();

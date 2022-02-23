@@ -1,11 +1,18 @@
-import {Router} from 'express';
-import {getUsuarios, postUsuario} from "../controllers/users";
+import { Router } from "express";
+import userController from "../controllers/users";
 
-const router = Router();
+class UserRoutes {
+  router: Router = Router();
 
+  constructor() {
+    this.config();
+  }
 
-router.get('/', getUsuarios);
-router.post('/create', postUsuario)
+  config() {
+    this.router.get("/id", userController.oneUser);
+    this.router.put("/id", userController.updateUser);
+    this.router.delete("/id", userController.removeUser);
+  }
+}
 
-
-export default router;
+export default new UserRoutes().router;

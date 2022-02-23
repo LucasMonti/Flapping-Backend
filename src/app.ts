@@ -1,51 +1,37 @@
 import express, { Application } from "express";
-import db from "./db/connection";
-<<<<<<< HEAD
 import cors from "cors";
-=======
-import cors from 'cors'
-import users from './routes/users'
 
->>>>>>> b5692f8fde1cd1001adcaffd525803975ae684ca
+import db from "./db/connection";
+
+import auth from "./routes/auth";
+import users from "./routes/users";
 
 export class App {
   private app: Application;
   private apiPaths = {
-        users : '/api/users'
-  }
+    auth: "/api",
+    users: "/api/users",
+  };
 
   constructor(private port: number | string) {
     this.app = express();
     this.settings();
-<<<<<<< HEAD
-    this.middleware();
-=======
     this.middlewares();
     this.routes();
->>>>>>> b5692f8fde1cd1001adcaffd525803975ae684ca
   }
 
   settings() {
     this.app.set("port", this.port);
   }
 
-<<<<<<< HEAD
-  middleware() {
+  middlewares() {
     this.app.use(cors());
     this.app.use(express.json());
   }
 
   routes() {
-    this.app.use("/user");
-=======
-  middlewares() {
-    this.app.use(cors())
-    this.app.use(express.json())
-  }
-
-  routes() {
-    this.app.use(this.apiPaths.users, users)
->>>>>>> b5692f8fde1cd1001adcaffd525803975ae684ca
+    this.app.use(this.apiPaths.auth, auth);
+    this.app.use(this.apiPaths.users, users);
   }
 
   async dbConnection() {
