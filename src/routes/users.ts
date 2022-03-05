@@ -9,9 +9,9 @@ class UserRoutes {
   }
 
   config() {
-    this.router.get("/id", userController.oneUser);
-    this.router.put("/id", userController.updateUser);
-    this.router.delete("/id", userController.removeUser);
+    this.router.get("/:id", userController.oneUser);
+    this.router.put("/:id", userController.updateUser);
+    this.router.delete("/:id", userController.removeUser);
   }
 }
 

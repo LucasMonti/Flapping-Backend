@@ -24,11 +24,11 @@ class AuthStore {
                 return;
             }
             catch (error) {
-                console.log(error);
                 throw new Error("Error al buscar un usuario");
             }
         });
     }
+    //Agregar el tipado a user unificando todo en una interface general
     signup(user) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

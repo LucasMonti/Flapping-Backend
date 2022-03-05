@@ -21,11 +21,10 @@ class AuthController {
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const email = req.body.email;
-                const password = req.body.password;
-                const user = yield auth_1.default.signin(email);
+                const userLogin = req.body;
+                const user = yield auth_1.default.signin(userLogin.email);
                 //Verificamos si existe el usuario y de ser asi, si la contraseña es correcta
-                if (!user || !bcryptjs_1.default.compareSync(password, user.password)) {
+                if (!user || !bcryptjs_1.default.compareSync(userLogin.password, user.password)) {
                     return response_1.default.error(res, "Invalid email or password", 400);
                 }
                 //Creamos el token
@@ -42,12 +41,10 @@ class AuthController {
     register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const email = req.body.email;
-                const passwordToEncript = req.body.password;
+                const newUser = req.body;
                 //Encriptamos la contraseña
-                const password = bcryptjs_1.default.hashSync(passwordToEncript, 10);
-                console.log(password);
-                const user = yield auth_1.default.signup({ email, password });
+                newUser.password = bcryptjs_1.default.hashSync(newUser.password, 10);
+                const user = yield auth_1.default.signup(newUser);
                 return response_1.default.success(res, "Register successfully", 200, { user });
             }
             catch (error) {

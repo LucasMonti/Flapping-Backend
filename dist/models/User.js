@@ -11,27 +11,27 @@ const User = connection_1.default.define("User", {
         autoIncrement: true,
         primaryKey: true,
     },
-    // name_user: {
-    //   type: DataTypes.STRING,
-    // },
-    // lastname_user: {
-    //   type: DataTypes.STRING,
-    // },
+    name: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    lastname: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
     email: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        unique: true,
     },
     password: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
     },
-    // wallet_address: {
-    //   type: DataTypes.STRING,
-    // },
-    // createdAt: {
-    //   type: DataTypes.DATE,
-    // },
-    // updatedAt: {
-    //   type: DataTypes.DATE,
-    // },
+    wallet_address: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
 }, {
     modelName: "user",
     underscored: true,
