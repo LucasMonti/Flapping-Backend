@@ -1,8 +1,13 @@
-export default interface IUser {
-  user_id: number;
-  //   name_user: string;
-  //   lastname_user: string;
+export interface IUser {
+  user_id?: number;
+  name: string;
+  lastname: string;
   email: string;
   password: string;
-  //   wallet_address: string;
+  wallet_address: string;
+}
+
+export interface IUserLogin {
+  email: string;
+  password: string;
 }

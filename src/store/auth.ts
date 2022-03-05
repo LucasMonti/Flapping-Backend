@@ -1,6 +1,6 @@
 import User from "../models/User";
 
-import IUser from "../helpers/interfaces/user";
+import { IUser } from "../helpers/interfaces/user";
 
 class AuthStore {
   public async signin(email: string): Promise<IUser | undefined> {
@@ -13,8 +13,6 @@ class AuthStore {
 
       return;
     } catch (error) {
-      console.log(error);
-
       throw new Error("Error al buscar un usuario");
     }
   }

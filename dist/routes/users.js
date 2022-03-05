@@ -11,9 +11,9 @@ class UserRoutes {
         this.config();
     }
     config() {
-        this.router.get("/id", users_1.default.oneUser);
-        this.router.put("/id", users_1.default.updateUser);
-        this.router.delete("/id", users_1.default.removeUser);
+        this.router.get("/:id", users_1.default.oneUser);
+        this.router.put("/:id", users_1.default.updateUser);
+        this.router.delete("/:id", users_1.default.removeUser);
     }
 }
 exports.default = new UserRoutes().router;

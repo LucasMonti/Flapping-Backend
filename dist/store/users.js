@@ -8,25 +8,43 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const User_1 = __importDefault(require("../models/User"));
 class UserStore {
     findOneUser(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //Busca con sequelize todos los usuarios
+                const user = yield User_1.default.findOne({ where: { user_id: id } });
+                if (user) {
+                    return user;
+                }
+                //Retornar un msj
+                return;
             }
             catch (error) {
-                //Atrapa el error
+                throw new Error("Error al buscar un usuario por su id");
             }
         });
     }
-    updateOneUser(id) {
+    //Analizar como tipar lo que se va a modificar
+    updateOneUser(id, bodyUpdate) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //Busca con sequelize todos los usuarios
+                const userUpdated = yield User_1.default.update(bodyUpdate, {
+                    where: {
+                        user_id: id,
+                    },
+                });
+                if (userUpdated[0] !== 0) {
+                    return userUpdated[1][1];
+                }
+                return;
             }
             catch (error) {
-                //Atrapa el error
+                throw new Error("Error al actualizar un usuario por su id");
             }
         });
     }
@@ -34,10 +52,17 @@ class UserStore {
     removeOneUser(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //Busca en otro archivo el metodo para buscar los usuarios
+                const userDeleted = yield User_1.default.destroy({
+                    where: {
+                        user_id: id,
+                    },
+                });
+                if (userDeleted !== 0) {
+                    //Borró el usuario, ver que devolver
+                }
             }
             catch (error) {
-                //Atrapa el error
+                throw new Error("Error al eliminar un usuario por su id");
             }
         });
     }

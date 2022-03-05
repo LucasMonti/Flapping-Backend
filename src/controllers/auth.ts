@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+import { IUser, IUserLogin } from "../helpers/interfaces/user";
 import config from "../config/config";
 import authStore from "../store/auth";
 import response from "../helpers/response";
@@ -9,14 +10,12 @@ import response from "../helpers/response";
 class AuthController {
   public async login(req: Request, res: Response): Promise<void> {
     try {
-      //Ver de desestructurar el obj req.body agregando el tipado
-      const email: string = req.body.email;
-      const password: string = req.body.password;
+      const userLogin: IUserLogin = req.body;
 
-      const user = await authStore.signin(email);
+      const user = await authStore.signin(userLogin.email);
 
       //Verificamos si existe el usuario y de ser asi, si la contraseña es correcta
-      if (!user || !bcryptjs.compareSync(password, user.password)) {
+      if (!user || !bcryptjs.compareSync(userLogin.password, user.password)) {
         return response.error(res, "Invalid email or password", 400);
       }
 
@@ -37,14 +36,12 @@ class AuthController {
 
   public async register(req: Request, res: Response): Promise<void> {
     try {
-      //Ver de desestructurar el obj req.body agregando el tipado
-      const email: string = req.body.email;
-      const passwordToEncript: string = req.body.password;
+      const newUser: IUser = req.body;
 
       //Encriptamos la contraseña
-      const password: string = bcryptjs.hashSync(passwordToEncript, 10);
+      newUser.password = bcryptjs.hashSync(newUser.password, 10);
 
-      const user = await authStore.signup({ email, password });
+      const user = await authStore.signup(newUser);
 
       return response.success(res, "Register successfully", 200, { user });
     } catch (error) {
