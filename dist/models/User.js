@@ -38,5 +38,6 @@ const User = connection_1.default.define("User", {
     tableName: "users",
     paranoid: true,
 });
+User.sync();
 exports.default = User;
 //# sourceMappingURL=User.js.map
