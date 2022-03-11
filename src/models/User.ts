@@ -48,4 +48,6 @@ const User = db.define<IUser>(
   }
 );
 
+User.sync();
+
 export default User;
