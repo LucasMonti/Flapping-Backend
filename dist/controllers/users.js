@@ -12,12 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const users_1 = __importDefault(require("../store/users"));
 const response_1 = __importDefault(require("../helpers/response"));
 class UserController {
     oneUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //Método para encontrar un usuario
+                const idu = parseInt(req.params.id);
+                const user = yield users_1.default.findOneUser(idu);
+                if (user !== undefined) {
+                    return response_1.default.success(res, "Usuario encontrado correctamente", 200, {
+                        user,
+                    });
+                }
+                return response_1.default.error(res, "Usuario no encontrado", 404);
             }
             catch (error) {
                 return response_1.default.error(res, "Internal server error", 500);
@@ -27,7 +35,15 @@ class UserController {
     updateUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //Método para actualizar un usuario
+                const idu = parseInt(req.params.id);
+                const userData = req.body;
+                const userUpdate = yield users_1.default.updateOneUser(idu, userData);
+                if (userUpdate !== undefined) {
+                    return response_1.default.success(res, "Usuario actualizado correctamente", 200, {
+                        userUpdate,
+                    });
+                }
+                return response_1.default.error(res, "Usuario a actualizar no encontrado", 404);
             }
             catch (error) {
                 return response_1.default.error(res, "Internal server error", 500);
@@ -37,7 +53,12 @@ class UserController {
     removeUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //Método para eliminar un usuario
+                const idu = parseInt(req.params.id);
+                const userDelete = yield users_1.default.removeOneUser(idu);
+                if (userDelete !== undefined) {
+                    return response_1.default.success(res, "Usuario eliminado correctamente", 200, null);
+                }
+                return response_1.default.error(res, "Usuario a eliminar no encontrado", 404);
             }
             catch (error) {
                 return response_1.default.error(res, "Internal server error", 500);
