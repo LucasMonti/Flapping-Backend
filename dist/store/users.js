@@ -21,7 +21,6 @@ class UserStore {
                 if (user) {
                     return user;
                 }
-                //Retornar un msj
                 return;
             }
             catch (error) {
@@ -39,7 +38,7 @@ class UserStore {
                     },
                 });
                 if (userUpdated[0] !== 0) {
-                    return userUpdated[1][1];
+                    return userUpdated[1][0];
                 }
                 return;
             }
@@ -58,8 +57,9 @@ class UserStore {
                     },
                 });
                 if (userDeleted !== 0) {
-                    //Borró el usuario, ver que devolver
+                    return "Usuario borrado";
                 }
+                return;
             }
             catch (error) {
                 throw new Error("Error al eliminar un usuario por su id");
