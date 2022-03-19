@@ -1,6 +1,8 @@
+import bcryptjs from "bcryptjs";
+
 import User from "../models/User";
 
-import { IUser } from "../helpers/interfaces/user";
+import { IUser, IUserUpdate } from "../interfaces/user";
 
 class UserStore {
   public async findOneUser(id: number): Promise<IUser | undefined> {
@@ -15,19 +17,26 @@ class UserStore {
     }
   }
 
-  //Analizar como tipar lo que se va a modificar
   public async updateOneUser(
     id: number,
-    bodyUpdate: IUser
+    bodyUpdate: IUserUpdate
   ): Promise<IUser | undefined> {
     try {
-      const userUpdated = await User.update(bodyUpdate, {
+      if (bodyUpdate.password !== undefined) {
+        bodyUpdate.password = bcryptjs.hashSync(bodyUpdate.password, 10);
+      }
+
+      const userUpdate = await User.update(bodyUpdate, {
         where: {
           user_id: id,
         },
       });
-      if (userUpdated[0] !== 0) {
-        return userUpdated[1][0];
+
+      if (userUpdate[0] !== 0) {
+        const userUpdated = await User.findOne({ where: { user_id: id } });
+        if (userUpdated !== null) {
+          return userUpdated;
+        }
       }
       return;
     } catch (error) {
@@ -35,7 +44,6 @@ class UserStore {
     }
   }
 
-  //ver los parametros que se les pasan
   public async removeOneUser(id: number): Promise<string | undefined> {
     try {
       const userDeleted = await User.destroy({
@@ -43,6 +51,7 @@ class UserStore {
           user_id: id,
         },
       });
+
       if (userDeleted !== 0) {
         return "Usuario borrado";
       }

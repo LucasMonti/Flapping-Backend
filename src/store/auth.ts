@@ -1,6 +1,6 @@
 import User from "../models/User";
 
-import { IUser } from "../helpers/interfaces/user";
+import { IUser } from "../interfaces/user";
 
 class AuthStore {
   public async signin(email: string): Promise<IUser | undefined> {
