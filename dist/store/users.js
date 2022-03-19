@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const User_1 = __importDefault(require("../models/User"));
 class UserStore {
     findOneUser(id) {
@@ -28,17 +29,22 @@ class UserStore {
             }
         });
     }
-    //Analizar como tipar lo que se va a modificar
     updateOneUser(id, bodyUpdate) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const userUpdated = yield User_1.default.update(bodyUpdate, {
+                if (bodyUpdate.password !== undefined) {
+                    bodyUpdate.password = bcryptjs_1.default.hashSync(bodyUpdate.password, 10);
+                }
+                const userUpdate = yield User_1.default.update(bodyUpdate, {
                     where: {
                         user_id: id,
                     },
                 });
-                if (userUpdated[0] !== 0) {
-                    return userUpdated[1][0];
+                if (userUpdate[0] !== 0) {
+                    const userUpdated = yield User_1.default.findOne({ where: { user_id: id } });
+                    if (userUpdated !== null) {
+                        return userUpdated;
+                    }
                 }
                 return;
             }
@@ -47,7 +53,6 @@ class UserStore {
             }
         });
     }
-    //ver los parametros que se les pasan
     removeOneUser(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

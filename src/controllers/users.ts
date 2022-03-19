@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 
+import { IUserUpdate } from "../interfaces/user";
+
 import userStore from "../store/users";
 import response from "../helpers/response";
 
@@ -26,7 +28,7 @@ class UserController {
     try {
       const idu = parseInt(req.params.id);
 
-      const userData = req.body;
+      const userData: IUserUpdate = req.body;
 
       const userUpdate = await userStore.updateOneUser(idu, userData);
 

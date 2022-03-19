@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-import { IUser, IUserLogin } from "../helpers/interfaces/user";
+import { IUser, IUserLogin } from "../interfaces/user";
 import config from "../config/config";
 import authStore from "../store/auth";
 import response from "../helpers/response";
