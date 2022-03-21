@@ -1,5 +1,7 @@
 import { Router } from "express";
+
 import userController from "../controllers/users";
+import validateUser from "../middlewares/validate-user";
 
 class UserRoutes {
   router: Router = Router();
@@ -10,7 +12,7 @@ class UserRoutes {
 
   config() {
     this.router.get("/:id", userController.oneUser);
-    this.router.put("/:id", userController.updateUser);
+    this.router.put("/:id", validateUser.updateUser, userController.updateUser);
     this.router.delete("/:id", userController.removeUser);
   }
 }

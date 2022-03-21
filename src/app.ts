@@ -5,12 +5,14 @@ import db from "./db/connection";
 
 import auth from "./routes/auth";
 import users from "./routes/users";
+import error from "./routes/error";
 
 export class App {
   private app: Application;
   private apiPaths = {
     auth: "/api",
     users: "/api/users",
+    error: "*",
   };
 
   constructor(private port: number | string) {
@@ -32,6 +34,7 @@ export class App {
   routes() {
     this.app.use(this.apiPaths.auth, auth);
     this.app.use(this.apiPaths.users, users);
+    this.app.use(this.apiPaths.error, error);
   }
 
   async dbConnection() {
