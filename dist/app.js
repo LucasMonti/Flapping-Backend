@@ -18,12 +18,14 @@ const cors_1 = __importDefault(require("cors"));
 const connection_1 = __importDefault(require("./db/connection"));
 const auth_1 = __importDefault(require("./routes/auth"));
 const users_1 = __importDefault(require("./routes/users"));
+const error_1 = __importDefault(require("./routes/error"));
 class App {
     constructor(port) {
         this.port = port;
         this.apiPaths = {
             auth: "/api",
             users: "/api/users",
+            error: "*",
         };
         this.app = (0, express_1.default)();
         this.settings();
@@ -40,6 +42,7 @@ class App {
     routes() {
         this.app.use(this.apiPaths.auth, auth_1.default);
         this.app.use(this.apiPaths.users, users_1.default);
+        this.app.use(this.apiPaths.error, error_1.default);
     }
     dbConnection() {
         return __awaiter(this, void 0, void 0, function* () {

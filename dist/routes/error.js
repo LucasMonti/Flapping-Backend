@@ -4,18 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const users_1 = __importDefault(require("../controllers/users"));
-const validate_user_1 = __importDefault(require("../middlewares/validate-user"));
+const error_1 = __importDefault(require("../controllers/error"));
 class UserRoutes {
     constructor() {
         this.router = (0, express_1.Router)();
         this.config();
     }
     config() {
-        this.router.get("/:id", users_1.default.oneUser);
-        this.router.put("/:id", validate_user_1.default.updateUser, users_1.default.updateUser);
-        this.router.delete("/:id", users_1.default.removeUser);
+        this.router.use(error_1.default.responseError);
     }
 }
 exports.default = new UserRoutes().router;
-//# sourceMappingURL=users.js.map
+//# sourceMappingURL=error.js.map
