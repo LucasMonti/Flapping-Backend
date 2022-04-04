@@ -5,13 +5,17 @@ import db from "./db/connection";
 
 import auth from "./routes/auth";
 import users from "./routes/users";
+import challenges from "./routes/challenges";
 import error from "./routes/error";
+
+import("./db/associations");
 
 export class App {
   private app: Application;
   private apiPaths = {
     auth: "/api",
     users: "/api/users",
+    challenges: "/api/challenges",
     error: "*",
   };
 
@@ -34,6 +38,7 @@ export class App {
   routes() {
     this.app.use(this.apiPaths.auth, auth);
     this.app.use(this.apiPaths.users, users);
+    this.app.use(this.apiPaths.challenges, challenges);
     this.app.use(this.apiPaths.error, error);
   }
 

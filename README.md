@@ -1,6 +1,6 @@
 # Flapping-Backend-Typescript
 
-(Describir la API)
+Backend para aplicacion Flapping. La misma fue creada para que miles de usuarios puedan cargar desafíos donde la gente podrá donar tokens.
 
 ## Instalación
 
@@ -21,42 +21,6 @@ En esta sección se encuentran los endpoint relacionados a la autenticación y/o
 > ```
 >
 > Permite al usuario loguearse a la aplicación
->
-> > **Body**
-> >
-> > ```
-> > {
-> >   "email": "...",
-> >   "password": "..."
-> > }
-> > ```
-> >
-> > **Response**
-> >
-> > _Success_
-> >
-> > ```
-> > {
-> >   "code": "OK",
-> >   "message": "Login successfully",
-> >   "success": true,
-> >   "data": {
-> >     "user": "...",
-> >     "token": "..."
-> >   }
-> > }
-> > ```
-> >
-> > _Error_
-> >
-> > ```
-> > {
-> >   "code": "ERROR",
-> >   "message": "...",
-> >   "success": false,
-> >   "data": null,
-> > }
-> > ```
 
 > **POST** Register
 >
@@ -65,44 +29,6 @@ En esta sección se encuentran los endpoint relacionados a la autenticación y/o
 > ```
 >
 > Permite al usuario darse de alta en la aplicación
->
-> > **Body**
-> >
-> > ```
-> > {
-> >   "name": "...",
-> >   "lastname": "...",
-> >   "email": "...",
-> >   "password": "...",
-> >   "wallet_address": "..."
-> > }
-> > ```
-> >
-> > **Response**
-> >
-> > _Success_
-> >
-> > ```
-> > {
-> >   "code": "OK",
-> >   "message": "Register successfully",
-> >   "success": true,
-> >   "data": {
-> >     "user": "...",
-> >   }
-> > }
-> > ```
-> >
-> > _Error_
-> >
-> > ```
-> > {
-> >   "code": "ERROR",
-> >   "message": "...",
-> >   "success": false,
-> >   "data": null,
-> > }
-> > ```
 
 ### USERS
 
@@ -115,38 +41,6 @@ En esta sección se encuentran los endpoint relacionados con usuarios ya registr
 > ```
 >
 > Permite buscar un usuario registrado por su id
->
-> > **Body**
-> >
-> > ```
-> > _id_ tomado de la url
-> > ```
-> >
-> > **Response**
-> >
-> > _Success_
-> >
-> > ```
-> > {
-> >   "code": "OK",
-> >   "message": "Register successfully",
-> >   "success": true,
-> >   "data": {
-> >     "user": "...",
-> >   }
-> > }
-> > ```
-> >
-> > _Error_
-> >
-> > ```
-> > {
-> >   "code": "ERROR",
-> >   "message": "...",
-> >   "success": false,
-> >   "data": null,
-> > }
-> > ```
 
 > **PUT** Actualiza un usuario
 >
@@ -155,44 +49,6 @@ En esta sección se encuentran los endpoint relacionados con usuarios ya registr
 > ```
 >
 > Permite actualizar ciertos parámetros de un usuario registrado por su id
->
-> > **Body**
-> >
-> > ```
-> > _id_ tomado de la url
-> > {
-> >   "name": "...",
-> >   "lastname": "...",
-> >   "password": "...",
-> >   "wallet_address": "..."
-> > }
-> > ```
-> >
-> > **Response**
-> >
-> > _Success_
-> >
-> > ```
-> > {
-> >   "code": "OK",
-> >   "message": "Register successfully",
-> >   "success": true,
-> >   "data": {
-> >     "user": "...",
-> >   }
-> > }
-> > ```
-> >
-> > _Error_
-> >
-> > ```
-> > {
-> >   "code": "ERROR",
-> >   "message": "...",
-> >   "success": false,
-> >   "data": null,
-> > }
-> > ```
 
 > **DELETE** Elimina un usuario
 >
@@ -201,35 +57,3 @@ En esta sección se encuentran los endpoint relacionados con usuarios ya registr
 > ```
 >
 > Permite eliminar un usuario registrado por su id
->
-> > **Body**
-> >
-> > ```
-> > _id_ tomado de la url
-> > ```
-> >
-> > **Response**
-> >
-> > _Success_
-> >
-> > ```
-> > {
-> >   "code": "OK",
-> >   "message": "Register successfully",
-> >   "success": true,
-> >   "data": {
-> >     "user": "...",
-> >   }
-> > }
-> > ```
-> >
-> > _Error_
-> >
-> > ```
-> > {
-> >   "code": "ERROR",
-> >   "message": "...",
-> >   "success": false,
-> >   "data": null,
-> > }
-> > ```
