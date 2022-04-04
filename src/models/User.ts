@@ -1,5 +1,7 @@
 import { Model, DataTypes } from "sequelize";
+
 import db from "../db/connection";
+import Challenge from "../models/Challenge";
 
 interface IUser extends Model {
   user_id: number;
