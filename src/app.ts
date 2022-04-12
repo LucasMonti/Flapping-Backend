@@ -8,7 +8,7 @@ import users from "./routes/users";
 import challenges from "./routes/challenges";
 import error from "./routes/error";
 
-import("./db/associations");
+// import("./db/associations");
 
 export class App {
   private app: Application;
@@ -45,13 +45,14 @@ export class App {
   async dbConnection() {
     try {
       await db.authenticate();
+      await db.sync();
       console.log("Database ON");
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
-  listen() {
+  async listen() {
     console.log();
 
     this.app.listen(this.app.get("port"), () => {

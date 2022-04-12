@@ -18,7 +18,7 @@ class AuthStore {
   }
 
   //Agregar el tipado a user unificando todo en una interface general
-  public async signup(user: any): Promise<IUser | undefined> {
+  public async signup(user: IUser): Promise<IUser | undefined> {
     try {
       const newUser = await User.create(user);
       return newUser;

@@ -5,7 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../db/connection"));
-const Status = connection_1.default.define("Status", {
+const Challenge_1 = __importDefault(require("./Challenge"));
+class Status extends sequelize_1.Model {
+}
+Status.init({
     status_id: {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
@@ -16,12 +19,14 @@ const Status = connection_1.default.define("Status", {
         allowNull: false,
     },
 }, {
+    sequelize: connection_1.default,
     modelName: "status",
     underscored: true,
     tableName: "status",
     paranoid: true,
     timestamps: false,
 });
-Status.sync();
+Status.hasMany(Challenge_1.default, { as: "status", foreignKey: "status_id" });
+Challenge_1.default.belongsTo(Status, { as: "status", foreignKey: "status_id" });
 exports.default = Status;
 //# sourceMappingURL=Status.js.map
