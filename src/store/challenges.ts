@@ -33,7 +33,7 @@ class ChallengeStore {
     }
   }
   public async addOneChallenge(
-    challenge: any
+    challenge: IChallenge
   ): Promise<IChallenge | undefined> {
     try {
       const newChallenge = await Challenge.create(challenge);

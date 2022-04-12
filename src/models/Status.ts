@@ -1,15 +1,18 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Optional } from "sequelize";
 
 import db from "../db/connection";
-import Challenge from "../models/Challenge";
 
-interface IStatus extends Model {
-  status_id: number;
-  name: string;
+import Challenge from "./Challenge";
+import { IStatus } from "../interfaces/status";
+
+interface ICreationStatus extends Optional<IStatus, "status_id"> {}
+
+class Status extends Model<IStatus, ICreationStatus> implements IStatus {
+  public status_id!: number;
+  public name!: string;
 }
 
-const Status = db.define<IStatus>(
-  "Status",
+Status.init(
   {
     status_id: {
       type: DataTypes.INTEGER,
@@ -22,6 +25,7 @@ const Status = db.define<IStatus>(
     },
   },
   {
+    sequelize: db,
     modelName: "status",
     underscored: true,
     tableName: "status",
@@ -30,6 +34,7 @@ const Status = db.define<IStatus>(
   }
 );
 
-Status.sync();
+Status.hasMany(Challenge, { as: "status", foreignKey: "status_id" });
+Challenge.belongsTo(Status, { as: "status", foreignKey: "status_id" });
 
 export default Status;

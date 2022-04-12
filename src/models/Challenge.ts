@@ -1,19 +1,24 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Optional } from "sequelize";
 
 import db from "../db/connection";
 
-interface IChallenge extends Model {
-  challenge_id: number;
-  title: string;
-  description: string;
-  target_amount: number;
-  status_id: number;
-  benefactor: string;
-  referente_id: number;
+import { IChallenge } from "../interfaces/challenge";
+
+interface ICreationChallenge extends Optional<IChallenge, "challenge_id"> {}
+class Challenge
+  extends Model<IChallenge, ICreationChallenge>
+  implements IChallenge
+{
+  public challenge_id!: number;
+  public title!: string;
+  public description!: string;
+  public target_amount!: number;
+  public status_id!: number;
+  public benefactor!: string;
+  public referente_id!: number;
 }
 
-const Challenge = db.define<IChallenge>(
-  "Challenge",
+Challenge.init(
   {
     challenge_id: {
       type: DataTypes.INTEGER,
@@ -46,6 +51,7 @@ const Challenge = db.define<IChallenge>(
     },
   },
   {
+    sequelize: db,
     modelName: "challenge",
     underscored: true,
     tableName: "challenges",
@@ -53,7 +59,5 @@ const Challenge = db.define<IChallenge>(
     timestamps: true,
   }
 );
-
-Challenge.sync();
 
 export default Challenge;

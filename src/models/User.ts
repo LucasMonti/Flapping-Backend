@@ -1,19 +1,22 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Optional } from "sequelize";
 
 import db from "../db/connection";
-import Challenge from "../models/Challenge";
 
-interface IUser extends Model {
-  user_id: number;
-  name: string;
-  lastname: string;
-  email: string;
-  password: string;
-  wallet_address: string;
+import Challenge from "./Challenge";
+import { IUser } from "../interfaces/user";
+
+interface ICreationUser extends Optional<IUser, "user_id"> {}
+
+class User extends Model<IUser, ICreationUser> implements IUser {
+  public user_id!: number;
+  public name!: string;
+  public lastname!: string;
+  public email!: string;
+  public password!: string;
+  public wallet_address!: string;
 }
 
-const User = db.define<IUser>(
-  "User",
+User.init(
   {
     user_id: {
       type: DataTypes.INTEGER,
@@ -43,6 +46,7 @@ const User = db.define<IUser>(
     },
   },
   {
+    sequelize: db,
     modelName: "user",
     underscored: true,
     tableName: "users",
@@ -50,6 +54,7 @@ const User = db.define<IUser>(
   }
 );
 
-User.sync();
+User.hasMany(Challenge, { as: "referente", foreignKey: "referente_id" });
+Challenge.belongsTo(User, { as: "referente", foreignKey: "referente_id" });
 
 export default User;
