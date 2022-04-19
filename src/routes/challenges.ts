@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import challengeController from "../controllers/challenges";
+import validateId from "../middlewares/validate-id";
 
 class ChallengeRoutes {
   router: Router = Router();
@@ -11,7 +12,17 @@ class ChallengeRoutes {
 
   config() {
     this.router.get("/", challengeController.allChallenges);
+    this.router.get(
+      "/:id",
+      validateId.typeId,
+      challengeController.oneChallenge
+    );
     this.router.post("/", challengeController.addChallenge);
+    this.router.delete(
+      "/:id",
+      validateId.typeId,
+      challengeController.removeChallenge
+    );
   }
 }
 

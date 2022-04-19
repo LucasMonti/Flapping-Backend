@@ -19,12 +19,25 @@ class ChallengeController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const challenges = yield challenges_1.default.findAllChallenges();
-                if (challenges !== undefined) {
-                    return response_1.default.success(res, "Challenges encontrados correctamente", 200, {
-                        challenges,
-                    });
+                if (challenges.length !== 0) {
+                    return response_1.default.success(res, "Challenges encontrados correctamente", 200, challenges);
                 }
                 return response_1.default.error(res, "Challenges no encontrado", 404);
+            }
+            catch (error) {
+                return response_1.default.error(res, "Internal server error", 500);
+            }
+        });
+    }
+    oneChallenge(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const idch = parseInt(req.params.id);
+                const challenge = yield challenges_1.default.findOneChallenge(idch);
+                if (challenge !== undefined) {
+                    return response_1.default.success(res, "Challenge encontrado correctamente", 200, challenge);
+                }
+                return response_1.default.error(res, "Challenge no encontrado", 404);
             }
             catch (error) {
                 return response_1.default.error(res, "Internal server error", 500);
@@ -39,6 +52,21 @@ class ChallengeController {
                 return response_1.default.success(res, "Challenge cargado correctamente", 200, {
                     challenge,
                 });
+            }
+            catch (error) {
+                return response_1.default.error(res, "Internal server error", 500);
+            }
+        });
+    }
+    removeChallenge(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const idch = parseInt(req.params.id);
+                const challengeDelete = yield challenges_1.default.removeOneChallenge(idch);
+                if (challengeDelete !== undefined) {
+                    return response_1.default.success(res, "Challenge eliminado correctamente", 200, null);
+                }
+                return response_1.default.error(res, "Challenge a eliminar no encontrado", 404);
             }
             catch (error) {
                 return response_1.default.error(res, "Internal server error", 500);
