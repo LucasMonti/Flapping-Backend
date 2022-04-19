@@ -44,6 +44,10 @@ class ChallengeController {
     try {
       const newChallenge: IChallenge = req.body;
 
+      if (newChallenge.status_id === undefined) {
+        newChallenge.status_id = 1;
+      }
+
       const challenge = await challengeStore.addOneChallenge(newChallenge);
 
       return response.success(res, "Challenge cargado correctamente", 200, {
