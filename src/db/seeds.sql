@@ -1,0 +1,17 @@
+USE  flapping;
+
+INSERT INTO status (status_id, name) VALUES (1, 'Generada');
+INSERT INTO status (status_id, name) VALUES (2, 'En proceso');
+INSERT INTO status (status_id, name) VALUES (3, 'Finalizada');
+INSERT INTO status (status_id, name) VALUES (4, 'Rechazada');
+INSERT INTO status (status_id, name) VALUES (5, 'Cancelada');
+
+INSERT INTO users (user_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (1,'Nico','Clemente','nico@example.com', '12345', 'nicoWallet', NOW(), NOW(), null);
+INSERT INTO users (user_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (2,'Lucas','Monti','lucas@example.com', '12345', 'lucasWallet', NOW(), NOW(), null);
+INSERT INTO users (user_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (3,'Diego','Monti','diego@example.com', '12345', 'diegoWallet', NOW(), NOW(), null);
+INSERT INTO users (user_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (4,'Carlos','Clemente','carlos@example.com', '12345', 'carlosWallet', NOW(), NOW(), null);
+
+INSERT INTO challenges (challenge_id, title, description, target_amount, status_id, benefactor, referente_id, created_at, updated_at, deleted_at) VALUES (1,"Emma", "Remedios para emmita", 5000, 1, "walletEmmita", 1, NOW(), NOW(), null);
+INSERT INTO challenges (challenge_id, title, description, target_amount, status_id, benefactor, referente_id, created_at, updated_at, deleted_at) VALUES (2,"Corrientes", "Incendios en Corrientes", 10000, 1, "walletBomberosCorrientes", 2, NOW(), NOW(), null);
+INSERT INTO challenges (challenge_id, title, description, target_amount, status_id, benefactor, referente_id, created_at, updated_at, deleted_at) VALUES (3,"Comunidad Wichi", "Ambulancia para comunidad indigena", 8000, 1, "walletWichis", 3, NOW(), NOW(), null);
+INSERT INTO challenges (challenge_id, title, description, target_amount, status_id, benefactor, referente_id, created_at, updated_at, deleted_at) VALUES (4,"Atletismo", "Vuelo para juegos Olimpicos", 7000, 1, "walletAtletas", 4, NOW(), NOW(), null);

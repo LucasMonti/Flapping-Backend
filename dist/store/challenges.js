@@ -33,14 +33,37 @@ class ChallengeStore {
                         },
                     ],
                 });
-                if (challenges) {
-                    return challenges;
-                }
-                return;
+                return challenges;
             }
             catch (error) {
                 console.log(error);
                 throw new Error("Error al buscar todos los challenges");
+            }
+        });
+    }
+    findOneChallenge(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const challenge = yield Challenge_1.default.findAll({
+                    where: { challenge_id: id },
+                    include: [
+                        {
+                            model: User_1.default,
+                            as: "referente",
+                            attributes: ["name", "email"],
+                        },
+                        {
+                            model: Status_1.default,
+                            as: "status",
+                            attributes: ["name"],
+                        },
+                    ],
+                });
+                return challenge[0];
+            }
+            catch (error) {
+                console.log(error);
+                throw new Error("Error al buscar un challenge");
             }
         });
     }
@@ -52,6 +75,24 @@ class ChallengeStore {
             }
             catch (error) {
                 throw new Error("Error al cargar un nuevo desafio");
+            }
+        });
+    }
+    removeOneChallenge(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const challengeDeleted = yield Challenge_1.default.destroy({
+                    where: {
+                        challenge_id: id,
+                    },
+                });
+                if (challengeDeleted !== 0) {
+                    return "Challenge borrado";
+                }
+                return;
+            }
+            catch (error) {
+                throw new Error("Error al eliminar un challenge por su id");
             }
         });
     }
