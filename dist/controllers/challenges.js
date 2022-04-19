@@ -48,6 +48,9 @@ class ChallengeController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const newChallenge = req.body;
+                if (newChallenge.status_id === undefined) {
+                    newChallenge.status_id = 1;
+                }
                 const challenge = yield challenges_1.default.addOneChallenge(newChallenge);
                 return response_1.default.success(res, "Challenge cargado correctamente", 200, {
                     challenge,
