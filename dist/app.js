@@ -20,7 +20,6 @@ const auth_1 = __importDefault(require("./routes/auth"));
 const users_1 = __importDefault(require("./routes/users"));
 const challenges_1 = __importDefault(require("./routes/challenges"));
 const error_1 = __importDefault(require("./routes/error"));
-// import("./db/associations");
 class App {
     constructor(port) {
         this.port = port;
@@ -62,7 +61,6 @@ class App {
     }
     listen() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log();
             this.app.listen(this.app.get("port"), () => {
                 try {
                     console.log("Server on port: ", this.app.get("port"));
