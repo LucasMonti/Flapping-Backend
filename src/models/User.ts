@@ -9,6 +9,7 @@ interface ICreationUser extends Optional<IUser, "user_id"> {}
 
 class User extends Model<IUser, ICreationUser> implements IUser {
   public user_id!: number;
+  public rol_id!: number;
   public name!: string;
   public lastname!: string;
   public email!: string;
@@ -22,6 +23,10 @@ User.init(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+    },
+    rol_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,

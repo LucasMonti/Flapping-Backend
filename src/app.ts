@@ -8,8 +8,6 @@ import users from "./routes/users";
 import challenges from "./routes/challenges";
 import error from "./routes/error";
 
-// import("./db/associations");
-
 export class App {
   private app: Application;
   private apiPaths = {
@@ -53,8 +51,6 @@ export class App {
   }
 
   async listen() {
-    console.log();
-
     this.app.listen(this.app.get("port"), () => {
       try {
         console.log("Server on port: ", this.app.get("port"));

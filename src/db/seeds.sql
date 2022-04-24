@@ -6,10 +6,14 @@ INSERT INTO status (status_id, name) VALUES (3, 'Finalizada');
 INSERT INTO status (status_id, name) VALUES (4, 'Rechazada');
 INSERT INTO status (status_id, name) VALUES (5, 'Cancelada');
 
-INSERT INTO users (user_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (1,'Nico','Clemente','nico@example.com', '12345', 'nicoWallet', NOW(), NOW(), null);
-INSERT INTO users (user_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (2,'Lucas','Monti','lucas@example.com', '12345', 'lucasWallet', NOW(), NOW(), null);
-INSERT INTO users (user_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (3,'Diego','Monti','diego@example.com', '12345', 'diegoWallet', NOW(), NOW(), null);
-INSERT INTO users (user_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (4,'Carlos','Clemente','carlos@example.com', '12345', 'carlosWallet', NOW(), NOW(), null);
+INSERT INTO roles (rol_id, name) VALUES (1, 'Usuario');
+INSERT INTO roles (rol_id, name) VALUES (2, 'Referente');
+INSERT INTO roles (rol_id, name) VALUES (3, 'Administrador');
+
+INSERT INTO users (user_id, rol_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (1,1,'Nico','Clemente','nico@example.com', '12345', 'nicoWallet', NOW(), NOW(), null);
+INSERT INTO users (user_id, rol_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (2,1,'Lucas','Monti','lucas@example.com', '12345', 'lucasWallet', NOW(), NOW(), null);
+INSERT INTO users (user_id, rol_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (3,1,'Diego','Monti','diego@example.com', '12345', 'diegoWallet', NOW(), NOW(), null);
+INSERT INTO users (user_id, rol_id, name, lastname, email, password, wallet_address, created_at, updated_at, deleted_at) VALUES (4,1,'Carlos','Clemente','carlos@example.com', '12345', 'carlosWallet', NOW(), NOW(), null);
 
 INSERT INTO challenges (challenge_id, title, description, target_amount, status_id, benefactor, referente_id, created_at, updated_at, deleted_at) VALUES (1,"Emma", "Remedios para emmita", 5000, 1, "walletEmmita", 1, NOW(), NOW(), null);
 INSERT INTO challenges (challenge_id, title, description, target_amount, status_id, benefactor, referente_id, created_at, updated_at, deleted_at) VALUES (2,"Corrientes", "Incendios en Corrientes", 10000, 1, "walletBomberosCorrientes", 2, NOW(), NOW(), null);
