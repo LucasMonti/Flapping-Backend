@@ -7,7 +7,23 @@ import { IChallenge } from "interfaces/challenge";
 class ChallengeController {
   public async allChallenges(req: Request, res: Response): Promise<void> {
     try {
-      const challenges = await challengeStore.findAllChallenges();
+      //PAGINADO
+      const page = req.query.page ? Number(req.query.page) : undefined;
+      const limit = req.query.limit ? Number(req.query.limit) : undefined;
+      const offset = page && limit ? (page - 1) * limit : undefined;
+
+      //FILTRO EN BUSQUEDA
+      const status = req.query.status ? req.query.status.toString() : undefined;
+      const referente = req.query.referente
+        ? req.query.referente.toString()
+        : undefined;
+
+      const challenges = await challengeStore.findAllChallenges(
+        offset,
+        limit,
+        status,
+        referente
+      );
       if (challenges.length !== 0) {
         return response.success(
           res,

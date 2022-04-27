@@ -1,3 +1,5 @@
+import { Op, literal } from "sequelize";
+
 import Challenge from "../models/Challenge";
 import User from "../models/User";
 import Status from "../models/Status";
@@ -5,23 +7,40 @@ import Status from "../models/Status";
 import { IChallenge } from "../interfaces/challenge";
 
 class ChallengeStore {
-  public async findAllChallenges(): Promise<IChallenge[]> {
+  public async findAllChallenges(
+    offset: number | undefined,
+    limit: number | undefined,
+    status: string | undefined,
+    referente: string | undefined
+  ): Promise<IChallenge[]> {
     try {
       const challenges = await Challenge.findAll({
+        order: [["challenge_id", "DESC"]],
         include: [
           {
             model: User,
             as: "referente",
             attributes: ["name", "email"],
+            where: {
+              name: {
+                [Op.eq]: referente,
+              },
+            },
           },
           {
             model: Status,
             as: "status",
             attributes: ["name"],
+            where: {
+              name: {
+                [Op.eq]: status,
+              },
+            },
           },
         ],
+        offset,
+        limit,
       });
-
       return challenges;
     } catch (error) {
       console.log(error);

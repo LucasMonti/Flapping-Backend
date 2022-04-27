@@ -14,11 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const User_1 = __importDefault(require("../models/User"));
+const Rol_1 = __importDefault(require("../models/Rol"));
 class UserStore {
     findOneUser(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const user = yield User_1.default.findOne({ where: { user_id: id } });
+                const user = yield User_1.default.findOne({
+                    include: {
+                        model: Rol_1.default,
+                        as: "rol",
+                        attributes: ["name"],
+                    },
+                    where: { user_id: id },
+                });
                 if (user) {
                     return user;
                 }

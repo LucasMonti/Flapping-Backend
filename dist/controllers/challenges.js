@@ -18,7 +18,16 @@ class ChallengeController {
     allChallenges(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const challenges = yield challenges_1.default.findAllChallenges();
+                //PAGINADO
+                const page = req.query.page ? Number(req.query.page) : undefined;
+                const limit = req.query.limit ? Number(req.query.limit) : undefined;
+                const offset = page && limit ? (page - 1) * limit : undefined;
+                //FILTRO EN BUSQUEDA
+                const status = req.query.status ? req.query.status.toString() : undefined;
+                const referente = req.query.referente
+                    ? req.query.referente.toString()
+                    : undefined;
+                const challenges = yield challenges_1.default.findAllChallenges(offset, limit, status, referente);
                 if (challenges.length !== 0) {
                     return response_1.default.success(res, "Challenges encontrados correctamente", 200, challenges);
                 }

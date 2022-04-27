@@ -12,26 +12,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
 const Challenge_1 = __importDefault(require("../models/Challenge"));
 const User_1 = __importDefault(require("../models/User"));
 const Status_1 = __importDefault(require("../models/Status"));
 class ChallengeStore {
-    findAllChallenges() {
+    findAllChallenges(offset, limit, status, referente) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const challenges = yield Challenge_1.default.findAll({
+                    order: [["challenge_id", "DESC"]],
                     include: [
                         {
                             model: User_1.default,
                             as: "referente",
                             attributes: ["name", "email"],
+                            where: {
+                                name: {
+                                    [sequelize_1.Op.eq]: referente,
+                                },
+                            },
                         },
                         {
                             model: Status_1.default,
                             as: "status",
                             attributes: ["name"],
+                            where: {
+                                name: {
+                                    [sequelize_1.Op.eq]: status,
+                                },
+                            },
                         },
                     ],
+                    offset,
+                    limit,
                 });
                 return challenges;
             }
