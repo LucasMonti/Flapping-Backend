@@ -1,11 +1,19 @@
 import User from "../models/User";
+import Rol from "../models/Rol";
 
 import { IUser } from "../interfaces/user";
 
 class AuthStore {
   public async signin(email: string): Promise<IUser | undefined> {
     try {
-      const user = await User.findOne({ where: { email } });
+      const user = await User.findOne({
+        include: {
+          model: Rol,
+          as: "rol",
+          attributes: ["name"],
+        },
+        where: { email },
+      });
 
       if (user) {
         return user;

@@ -21,7 +21,7 @@ class ErrorController {
                 return response_1.default.error(res, message, 404);
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                return response_1.default.error(res, error.message, 500);
             }
         });
     }

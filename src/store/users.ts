@@ -1,13 +1,21 @@
 import bcryptjs from "bcryptjs";
 
 import User from "../models/User";
+import Rol from "../models/Rol";
 
 import { IUser, IUserUpdate } from "../interfaces/user";
 
 class UserStore {
   public async findOneUser(id: number): Promise<IUser | undefined> {
     try {
-      const user = await User.findOne({ where: { user_id: id } });
+      const user = await User.findOne({
+        include: {
+          model: Rol,
+          as: "rol",
+          attributes: ["name"],
+        },
+        where: { user_id: id },
+      });
       if (user) {
         return user;
       }

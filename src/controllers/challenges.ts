@@ -7,7 +7,23 @@ import { IChallenge } from "interfaces/challenge";
 class ChallengeController {
   public async allChallenges(req: Request, res: Response): Promise<void> {
     try {
-      const challenges = await challengeStore.findAllChallenges();
+      //PAGINADO
+      const page = req.query.page ? Number(req.query.page) : undefined;
+      const limit = req.query.limit ? Number(req.query.limit) : undefined;
+      const offset = page && limit ? (page - 1) * limit : undefined;
+
+      //FILTRO EN BUSQUEDA
+      const status = req.query.status ? Number(req.query.status) : undefined;
+      const referente = req.query.referente
+        ? Number(req.query.referente)
+        : undefined;
+
+      const challenges = await challengeStore.findAllChallenges(
+        offset,
+        limit,
+        status,
+        referente
+      );
       if (challenges.length !== 0) {
         return response.success(
           res,
@@ -16,9 +32,9 @@ class ChallengeController {
           challenges
         );
       }
-      return response.error(res, "Challenges no encontrado", 404);
-    } catch (error) {
-      return response.error(res, "Internal server error", 500);
+      return response.error(res, "Challenges no encontrados", 404);
+    } catch (error: any) {
+      return response.error(res, error.message, 500);
     }
   }
 
@@ -35,8 +51,8 @@ class ChallengeController {
         );
       }
       return response.error(res, "Challenge no encontrado", 404);
-    } catch (error) {
-      return response.error(res, "Internal server error", 500);
+    } catch (error: any) {
+      return response.error(res, error.message, 500);
     }
   }
 
@@ -53,8 +69,8 @@ class ChallengeController {
       return response.success(res, "Challenge cargado correctamente", 200, {
         challenge,
       });
-    } catch (error) {
-      return response.error(res, "Internal server error", 500);
+    } catch (error: any) {
+      return response.error(res, error.message, 500);
     }
   }
 
@@ -74,8 +90,8 @@ class ChallengeController {
       }
 
       return response.error(res, "Challenge a eliminar no encontrado", 404);
-    } catch (error) {
-      return response.error(res, "Internal server error", 500);
+    } catch (error: any) {
+      return response.error(res, error.message, 500);
     }
   }
 }

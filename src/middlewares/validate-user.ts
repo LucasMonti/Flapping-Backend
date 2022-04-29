@@ -29,6 +29,7 @@ class ValidateUser {
   ): Promise<void> {
     const schema = Joi.object({
       name: Joi.string().required(),
+      rol_id: Joi.number().required(),
       lastname: Joi.string().required(),
       email: Joi.string().required(),
       password: Joi.string().required(),
