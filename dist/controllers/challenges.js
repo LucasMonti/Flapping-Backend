@@ -23,18 +23,18 @@ class ChallengeController {
                 const limit = req.query.limit ? Number(req.query.limit) : undefined;
                 const offset = page && limit ? (page - 1) * limit : undefined;
                 //FILTRO EN BUSQUEDA
-                const status = req.query.status ? req.query.status.toString() : undefined;
+                const status = req.query.status ? Number(req.query.status) : undefined;
                 const referente = req.query.referente
-                    ? req.query.referente.toString()
+                    ? Number(req.query.referente)
                     : undefined;
                 const challenges = yield challenges_1.default.findAllChallenges(offset, limit, status, referente);
                 if (challenges.length !== 0) {
                     return response_1.default.success(res, "Challenges encontrados correctamente", 200, challenges);
                 }
-                return response_1.default.error(res, "Challenges no encontrado", 404);
+                return response_1.default.error(res, "Challenges no encontrados", 404);
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                return response_1.default.error(res, error.message, 500);
             }
         });
     }
@@ -49,7 +49,7 @@ class ChallengeController {
                 return response_1.default.error(res, "Challenge no encontrado", 404);
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                return response_1.default.error(res, error.message, 500);
             }
         });
     }
@@ -66,7 +66,7 @@ class ChallengeController {
                 });
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                return response_1.default.error(res, error.message, 500);
             }
         });
     }
@@ -81,7 +81,7 @@ class ChallengeController {
                 return response_1.default.error(res, "Challenge a eliminar no encontrado", 404);
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                return response_1.default.error(res, error.message, 500);
             }
         });
     }

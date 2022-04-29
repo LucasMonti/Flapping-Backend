@@ -25,6 +25,24 @@ class ValidateChallenge {
       return response.error(res, error.details[0].message, 500);
     }
   }
+  public async filtersFindChallenges(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    const schema = Joi.object({
+      page: Joi.number(),
+      limit: Joi.number(),
+      status: Joi.number(),
+      referente: Joi.number(),
+    });
+    try {
+      await schema.validateAsync(req.query);
+      return next();
+    } catch (error: any) {
+      return response.error(res, error.details[0].message, 500);
+    }
+  }
 }
 
 export default new ValidateChallenge();

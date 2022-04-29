@@ -34,7 +34,7 @@ class AuthController {
                 return response_1.default.success(res, "Login successfully", 200, { user, token });
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                return response_1.default.error(res, error.message, 500);
             }
         });
     }
@@ -48,7 +48,7 @@ class AuthController {
                 return response_1.default.success(res, "Register successfully", 200, { user });
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                return response_1.default.error(res, error.message, 500);
             }
         });
     }

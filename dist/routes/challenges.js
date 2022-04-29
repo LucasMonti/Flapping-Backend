@@ -13,7 +13,7 @@ class ChallengeRoutes {
         this.config();
     }
     config() {
-        this.router.get("/", challenges_1.default.allChallenges);
+        this.router.get("/", validate_challenge_1.default.filtersFindChallenges, challenges_1.default.allChallenges);
         this.router.get("/:id", validate_id_1.default.typeId, challenges_1.default.oneChallenge);
         this.router.post("/", validate_challenge_1.default.addChallenge, challenges_1.default.addChallenge);
         this.router.delete("/:id", validate_id_1.default.typeId, challenges_1.default.removeChallenge);

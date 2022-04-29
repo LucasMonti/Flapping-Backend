@@ -12,7 +12,11 @@ class ChallengeRoutes {
   }
 
   config() {
-    this.router.get("/", challengeController.allChallenges);
+    this.router.get(
+      "/",
+      validateChallenge.filtersFindChallenges,
+      challengeController.allChallenges
+    );
     this.router.get(
       "/:id",
       validateId.typeId,

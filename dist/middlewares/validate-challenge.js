@@ -34,6 +34,23 @@ class ValidateChallenge {
             }
         });
     }
+    filtersFindChallenges(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const schema = joi_1.default.object({
+                page: joi_1.default.number(),
+                limit: joi_1.default.number(),
+                status: joi_1.default.number(),
+                referente: joi_1.default.number(),
+            });
+            try {
+                yield schema.validateAsync(req.query);
+                return next();
+            }
+            catch (error) {
+                return response_1.default.error(res, error.details[0].message, 500);
+            }
+        });
+    }
 }
 exports.default = new ValidateChallenge();
 //# sourceMappingURL=validate-challenge.js.map

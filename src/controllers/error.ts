@@ -9,8 +9,8 @@ class ErrorController {
         req.headers.host + req.originalUrl
       } Metodo ${req.method.toUpperCase()}  not found`;
       return response.error(res, message, 404);
-    } catch (error) {
-      return response.error(res, "Internal server error", 500);
+    } catch (error: any) {
+      return response.error(res, error.message, 500);
     }
   }
 }

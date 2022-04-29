@@ -13,9 +13,9 @@ class ChallengeController {
       const offset = page && limit ? (page - 1) * limit : undefined;
 
       //FILTRO EN BUSQUEDA
-      const status = req.query.status ? req.query.status.toString() : undefined;
+      const status = req.query.status ? Number(req.query.status) : undefined;
       const referente = req.query.referente
-        ? req.query.referente.toString()
+        ? Number(req.query.referente)
         : undefined;
 
       const challenges = await challengeStore.findAllChallenges(
@@ -32,9 +32,9 @@ class ChallengeController {
           challenges
         );
       }
-      return response.error(res, "Challenges no encontrado", 404);
-    } catch (error) {
-      return response.error(res, "Internal server error", 500);
+      return response.error(res, "Challenges no encontrados", 404);
+    } catch (error: any) {
+      return response.error(res, error.message, 500);
     }
   }
 
@@ -51,8 +51,8 @@ class ChallengeController {
         );
       }
       return response.error(res, "Challenge no encontrado", 404);
-    } catch (error) {
-      return response.error(res, "Internal server error", 500);
+    } catch (error: any) {
+      return response.error(res, error.message, 500);
     }
   }
 
@@ -69,8 +69,8 @@ class ChallengeController {
       return response.success(res, "Challenge cargado correctamente", 200, {
         challenge,
       });
-    } catch (error) {
-      return response.error(res, "Internal server error", 500);
+    } catch (error: any) {
+      return response.error(res, error.message, 500);
     }
   }
 
@@ -90,8 +90,8 @@ class ChallengeController {
       }
 
       return response.error(res, "Challenge a eliminar no encontrado", 404);
-    } catch (error) {
-      return response.error(res, "Internal server error", 500);
+    } catch (error: any) {
+      return response.error(res, error.message, 500);
     }
   }
 }

@@ -28,7 +28,7 @@ class UserController {
                 return response_1.default.error(res, "Usuario no encontrado", 404);
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                return response_1.default.error(res, error.message, 500);
             }
         });
     }
@@ -46,7 +46,7 @@ class UserController {
                 return response_1.default.error(res, "Usuario a actualizar no encontrado", 404);
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                return response_1.default.error(res, error.message, 500);
             }
         });
     }
@@ -61,7 +61,7 @@ class UserController {
                 return response_1.default.error(res, "Usuario a eliminar no encontrado", 404);
             }
             catch (error) {
-                return response_1.default.error(res, "Internal server error", 500);
+                return response_1.default.error(res, error.message, 500);
             }
         });
     }

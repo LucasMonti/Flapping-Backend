@@ -29,8 +29,8 @@ class AuthController {
       );
 
       return response.success(res, "Login successfully", 200, { user, token });
-    } catch (error) {
-      return response.error(res, "Internal server error", 500);
+    } catch (error: any) {
+      return response.error(res, error.message, 500);
     }
   }
 
@@ -44,8 +44,8 @@ class AuthController {
       const user = await authStore.signup(newUser);
 
       return response.success(res, "Register successfully", 200, { user });
-    } catch (error) {
-      return response.error(res, "Internal server error", 500);
+    } catch (error: any) {
+      return response.error(res, error.message, 500);
     }
   }
 }

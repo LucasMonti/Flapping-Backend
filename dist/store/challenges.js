@@ -19,6 +19,22 @@ const Status_1 = __importDefault(require("../models/Status"));
 class ChallengeStore {
     findAllChallenges(offset, limit, status, referente) {
         return __awaiter(this, void 0, void 0, function* () {
+            let whereStatus = {};
+            let whereReferente = {};
+            if (status !== undefined) {
+                whereStatus = {
+                    status_id: {
+                        [sequelize_1.Op.eq]: status,
+                    },
+                };
+            }
+            if (referente !== undefined) {
+                whereReferente = {
+                    user_id: {
+                        [sequelize_1.Op.eq]: referente,
+                    },
+                };
+            }
             try {
                 const challenges = yield Challenge_1.default.findAll({
                     order: [["challenge_id", "DESC"]],
@@ -27,21 +43,13 @@ class ChallengeStore {
                             model: User_1.default,
                             as: "referente",
                             attributes: ["name", "email"],
-                            where: {
-                                name: {
-                                    [sequelize_1.Op.eq]: referente,
-                                },
-                            },
+                            where: whereReferente,
                         },
                         {
                             model: Status_1.default,
                             as: "status",
                             attributes: ["name"],
-                            where: {
-                                name: {
-                                    [sequelize_1.Op.eq]: status,
-                                },
-                            },
+                            where: whereStatus,
                         },
                     ],
                     offset,
