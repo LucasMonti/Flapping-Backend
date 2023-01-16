@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 
-const db = new Sequelize("flapping", "root", "", {
+const db = new Sequelize("flapping", "root", "root", {
   host: "localhost",
   dialect: "mariadb",
   logging: false,

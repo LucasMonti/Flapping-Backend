@@ -49,4 +49,4 @@ User.init({
 User.hasMany(Challenge_1.default, { as: "referente", foreignKey: "referente_id" });
 Challenge_1.default.belongsTo(User, { as: "referente", foreignKey: "referente_id" });
 exports.default = User;
-//# sourceMappingURL=User.js.map
+//# sourceMappingURL=User%20copy.js.map

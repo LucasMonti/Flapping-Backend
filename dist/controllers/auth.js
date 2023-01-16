@@ -42,6 +42,7 @@ class AuthController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const newUser = req.body;
+                newUser.rol_id = 2;
                 //Encriptamos la contraseña
                 newUser.password = bcryptjs_1.default.hashSync(newUser.password, 10);
                 const user = yield auth_1.default.signup(newUser);

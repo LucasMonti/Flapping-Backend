@@ -34,7 +34,7 @@ class ValidateUser {
         return __awaiter(this, void 0, void 0, function* () {
             const schema = joi_1.default.object({
                 name: joi_1.default.string().required(),
-                rol_id: joi_1.default.number().required(),
+                rol_id: joi_1.default.number(),
                 lastname: joi_1.default.string().required(),
                 email: joi_1.default.string().required(),
                 password: joi_1.default.string().required(),

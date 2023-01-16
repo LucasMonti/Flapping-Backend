@@ -27,8 +27,10 @@ class AuthStore {
 
   //Agregar el tipado a user unificando todo en una interface general
   public async signup(user: IUser): Promise<IUser | undefined> {
+    console.log(user, 'user store')
     try {
       const newUser = await User.create(user);
+      console.log(newUser, 'new User')
       return newUser;
     } catch (error) {
       throw new Error("Error al guardar un usuario");

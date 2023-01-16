@@ -39,8 +39,10 @@ class AuthStore {
     //Agregar el tipado a user unificando todo en una interface general
     signup(user) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log(user, 'user store');
             try {
                 const newUser = yield User_1.default.create(user);
+                console.log(newUser, 'new User');
                 return newUser;
             }
             catch (error) {

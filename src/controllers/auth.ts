@@ -37,7 +37,7 @@ class AuthController {
   public async register(req: Request, res: Response): Promise<void> {
     try {
       const newUser: IUser = req.body;
-
+      newUser.rol_id = 2
       //Encriptamos la contraseña
       newUser.password = bcryptjs.hashSync(newUser.password, 10);
 
